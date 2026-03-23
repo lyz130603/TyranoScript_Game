@@ -2,22 +2,24 @@ name: Extract ZIP
 
 on:
   push:
-    paths:
-      - '*.zip'
+    branches:
+      - main
 
 jobs:
   extract:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          for f in *.zip; do
-            unzip -o "$f"
-            rm "$f"
-          done
-      - run: |
+      - name: Extract data.zip
+        run: |
+          if [ -f "data.zip" ]; then
+            unzip -o data.zip
+            rm data.zip
+          fi
+      - name: Commit
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "extract" || true
+          git commit -m "extract data.zip" || exit 0
           git push
