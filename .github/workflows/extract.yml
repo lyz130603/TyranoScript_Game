@@ -1,25 +1,34 @@
-name: Extract ZIP
+name: Extract and Commit ZIP
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   extract:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Extract data.zip
+      
+      - name: Extract ZIP files
         run: |
-          ls -la
-          if [ -f "data.zip" ]; then
-            echo "找到 data.zip，开始解压..."
-            unzip -o data.zip
-            rm data.zip
-            echo "解压完成，已删除 zip"
-          else
-            echo "未找到 data.zip"
-          fi
-      - name: List files after extraction
-        run: ls -la
+          for zipfile in *.zip; do
+            if [ -f "$zipfile" ]; then
+              echo "Extracting $zipfile..."
+              unzip -o "$zipfile"
+              rm "$zipfile"
+              echo "Done"
+            fi
+          done
+      
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Extract ZIP files" || echo "No changes to commit"
+          git push
