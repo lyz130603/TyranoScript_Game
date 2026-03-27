@@ -9,7 +9,7 @@ text-shadow:1px 1px 2px #000;
 z-index:9999;
 pointer-events:none;
 ">
-这里是左下角常驻小字
+纪念《恶魔连结》（暂时） ｜ 与《恶魔连结》一样的TyranoScript引擎
 </div>
 [endhtml]
 “星”存梦想，创造未来[p]
