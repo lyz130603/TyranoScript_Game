@@ -12,7 +12,7 @@ width:0;
 height:0;
 overflow:visible;
 ">
-（文字的信息）
+纪念《恶魔连结》（暂时） ｜ 与《恶魔连结》一样的TyranoScript引擎
 </div>
 [endhtml]
 
